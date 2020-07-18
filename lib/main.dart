@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localization_app/Localization/demo_localization.dart';
+import 'package:flutter_localization_app/Localization/localization_constants.dart';
 import 'package:flutter_localization_app/routes/custom_router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import './routes/custom_router.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  //## Localization Code Started
   Locale _locale;
 
   void setLocale(Locale locale) {
@@ -32,42 +34,58 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
+  void didChangeDependencies() {
+    getLocale().then((locale) {
+      setState(() {
+        this._locale = locale;
+      });
+    });
+    super.didChangeDependencies();
+  }
+  //## Localization Code ended
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      
-      //## Localization Code Started
-      locale: _locale,
-      // Language and Country codes
-      supportedLocales: [
-        Locale('en', 'US'),
-        Locale('bn', 'BD')
-      ],
-      localizationsDelegates: [
-        // ... app-specific localization delegate[s] here
-        DemoLocalization.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      localeResolutionCallback: (deviceLocale, supportedLocales) {
-        for (var locale in supportedLocales) {
-          if (locale.languageCode == deviceLocale.languageCode && locale.countryCode == deviceLocale.countryCode) {
-            return deviceLocale;
+    if (_locale == null) {
+      return Container(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else {
+      return MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+
+        //## Localization Code Started
+        locale: _locale,
+        // Language and Country codes
+        supportedLocales: [Locale('en', 'US'), Locale('bn', 'BD')],
+        localizationsDelegates: [
+          // ... app-specific localization delegate[s] here
+          DemoLocalization.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        localeResolutionCallback: (deviceLocale, supportedLocales) {
+          for (var locale in supportedLocales) {
+            if (locale.languageCode == deviceLocale.languageCode &&
+                locale.countryCode == deviceLocale.countryCode) {
+              return deviceLocale;
+            }
           }
-        }
 
-        return supportedLocales.first;
-      },
-      // Localization Code Finishes
+          return supportedLocales.first;
+        },
+        // Localization Code Finishes
 
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: CustomRouter.allRoutes,
-      initialRoute: homeRoute,
-
-    );
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: CustomRouter.allRoutes,
+        initialRoute: homeRoute,
+      );
+    }
   }
 }

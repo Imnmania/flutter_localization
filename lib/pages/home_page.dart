@@ -28,19 +28,9 @@ class _HomePageState extends State<HomePage> {
   var myDateFormat = DateFormat('dd-MM-yyyy');
 
   //## Language Change Funtion Started
-  void _changeLanguage(Language language) {
+  void _changeLanguage(Language language) async{
     // print(language.languageCode);
-    Locale _temp;
-    switch(language.languageCode) {
-      case 'en':
-      _temp = Locale(language.languageCode, 'US');
-      break;
-      case 'bn':
-      _temp = Locale(language.languageCode, 'BD');
-      break;
-      default:
-      _temp = Locale(language.languageCode, 'US');
-    }
+    Locale _temp = await setLocale(language.languageCode);
 
     MyApp.setLocale(context, _temp);
   }

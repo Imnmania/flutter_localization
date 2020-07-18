@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization_app/Localization/localization_constants.dart';
 // import 'package:flutter_localization_app/routes/route_names.dart';
 
 class AboutPage extends StatefulWidget {
@@ -13,6 +14,9 @@ class _AboutPageState extends State<AboutPage> {
       appBar: AppBar(
         title: Text('About Page'),
         centerTitle: true,
+      ),
+      body: Container(
+        child: Text(getTranslated(context, 'about')),
       ),
     );
   }
