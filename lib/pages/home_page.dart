@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localization_app/Localization/demo_localization.dart';
+// import 'package:flutter_localization_app/Localization/demo_localization.dart';
+import 'package:flutter_localization_app/Localization/localization_constants.dart';
 import 'package:flutter_localization_app/classes/language.dart';
 import 'package:flutter_localization_app/routes/route_names.dart';
 // import 'package:flutter_localization_app/routes/route_names.dart';
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   final inputNameController = new TextEditingController();
   final inputEmailController = new TextEditingController();
   final inputDateController = new TextEditingController();
+
 
   var myDateFormat = DateFormat('dd-MM-yyyy');
 
@@ -49,7 +51,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       drawer: _drawerList(),
       appBar: AppBar(
-        title: Text(DemoLocalization.of(context).getTranslatedValues('home_page')),
+        title: Text(getTranslated(context, 'home_page')),
         centerTitle: true,
         actions: <Widget>[
           Padding(
@@ -114,7 +116,7 @@ class _HomePageState extends State<HomePage> {
               size: 30,
             ),
             title: Text(
-              'About Us',
+              getTranslated(context, 'about_us'),
               style: _textStyle,
             ),
             onTap: () {
@@ -131,7 +133,7 @@ class _HomePageState extends State<HomePage> {
               size: 30,
             ),
             title: Text(
-              'Settings',
+              getTranslated(context, 'settings'),
               style: _textStyle,
             ),
             onTap: () {
@@ -154,8 +156,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             height: MediaQuery.of(context).size.height / 4,
             child: Center(
-              child: Text(
-                'Personal Information',
+              child: Text(getTranslated(context, 'personal_info'),
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -165,16 +166,17 @@ class _HomePageState extends State<HomePage> {
           ),
           TextFormField(
             controller: inputNameController,
+            initialValue: null,
             validator: (val) {
               if (val.isEmpty) {
-                return 'required field';
+                return getTranslated(context, 'required_field');
               }
               return null;
             },
             decoration: InputDecoration(
               border: OutlineInputBorder(),
-              labelText: 'Name',
-              hintText: 'Enter name',
+              labelText: getTranslated(context, 'name'),
+              hintText: getTranslated(context, 'name_hint'),
             ),
           ),
           SizedBox(
@@ -184,14 +186,14 @@ class _HomePageState extends State<HomePage> {
             controller: inputEmailController,
             validator: (val) {
               if (val.isEmpty) {
-                return 'required field';
+                return getTranslated(context, 'required_field');
               }
               return null;
             },
             decoration: InputDecoration(
               border: OutlineInputBorder(),
-              labelText: 'Email',
-              hintText: 'Enter email address',
+              labelText: getTranslated(context, 'email'),
+              hintText: getTranslated(context, 'email_hint'),
             ),
           ),
           SizedBox(
@@ -199,16 +201,16 @@ class _HomePageState extends State<HomePage> {
           ),
           TextFormField(
             controller: inputDateController,
-            // validator: (val) {
-            //   if (val.isEmpty) {
-            //     return 'required field';
-            //   }
-            //   return null;
-            // },
+            validator: (val) {
+              if (val.isEmpty) {
+                return getTranslated(context, 'required_field');
+              }
+              return null;
+            },
             decoration: InputDecoration(
               border: OutlineInputBorder(),
-              labelText: 'Date of Birth',
-              hintText: 'Select date of birth',
+              labelText: getTranslated(context, 'date_of_birth'),
+              hintText: getTranslated(context, 'date_of_birth_hint'),
             ),
             onTap: () async {
               FocusScope.of(context).requestFocus(FocusNode());
@@ -238,7 +240,7 @@ class _HomePageState extends State<HomePage> {
             color: Theme.of(context).primaryColor,
             child: Center(
               child: Text(
-                'Submit Information',
+                getTranslated(context, 'submit_info'),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,

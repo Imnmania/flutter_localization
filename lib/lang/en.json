@@ -6,6 +6,7 @@
     "email": "Email",
     "email_hint": "Enter your email",
     "date_of_birth": "Date of Birth",
+    "date_of_birth_hint": "Enter your date of birth",
     "required_field": "Required Field",
     "submit_info": "Submit Information",
     "about_us": "About Us",
