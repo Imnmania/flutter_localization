@@ -1,0 +1,15 @@
+{
+    "home_page": "Home Page",
+    "personal_info": "Personal Information",
+    "name": "Name",
+    "name_hint": "Enter your name",
+    "email": "Email",
+    "email_hint": "Enter your email",
+    "date_of_birth": "Date of Birth",
+    "required_field": "Required Field",
+    "submit_info": "Submit Information",
+    "about_us": "About Us",
+    "settings": "Settings",
+    "change_language": "Change Language",
+    "about": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+}

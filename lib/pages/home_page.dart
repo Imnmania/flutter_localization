@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization_app/Localization/demo_localization.dart';
 import 'package:flutter_localization_app/classes/language.dart';
 import 'package:flutter_localization_app/routes/route_names.dart';
 // import 'package:flutter_localization_app/routes/route_names.dart';
 import 'package:intl/intl.dart';
 import '../classes/language.dart';
+import '../main.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -24,7 +26,20 @@ class _HomePageState extends State<HomePage> {
   var myDateFormat = DateFormat('dd-MM-yyyy');
 
   void _changeLanguage(Language language) {
-    print(language.languageCode);
+    // print(language.languageCode);
+    Locale _temp;
+    switch(language.languageCode) {
+      case 'en':
+      _temp = Locale(language.languageCode, 'US');
+      break;
+      case 'bn':
+      _temp = Locale(language.languageCode, 'BD');
+      break;
+      default:
+      _temp = Locale(language.languageCode, 'US');
+    }
+
+    MyApp.setLocale(context, _temp);
   }
 
   @override
@@ -32,7 +47,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       drawer: _drawerList(),
       appBar: AppBar(
-        title: Text('Home Page'),
+        title: Text(DemoLocalization.of(context).getTranslatedValues('home_page')),
         centerTitle: true,
         actions: <Widget>[
           Padding(
