@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization_app/classes/language.dart';
 import 'package:flutter_localization_app/routes/route_names.dart';
 // import 'package:flutter_localization_app/routes/route_names.dart';
 import 'package:intl/intl.dart';
+import '../classes/language.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -21,6 +23,9 @@ class _HomePageState extends State<HomePage> {
 
   var myDateFormat = DateFormat('dd-MM-yyyy');
 
+  void _changeLanguage(Language language) {
+    print(language.languageCode);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +34,39 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('Home Page'),
         centerTitle: true,
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: DropdownButton(
+              underline: SizedBox(),
+              icon: Icon(
+                Icons.language,
+                color: Colors.white,
+              ),
+              items: Language.languageList()
+                  .map<DropdownMenuItem<Language>>((lang) => DropdownMenuItem(
+                        value: lang,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Text(lang.flag, style: TextStyle(fontSize: 30),),
+                            Text(lang.name),
+                          ],
+                        ),
+                      ))
+                  .toList(),
+              onChanged: (Language language) {
+                _changeLanguage(language);
+              },
+            ),
+          ),
+        ],
       ),
-      body: Container(
-        padding: EdgeInsets.all(20),
-        child: _mainForm(context),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(20),
+          child: _mainForm(context),
+        ),
       ),
     );
   }
@@ -164,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                 initialDate: DateTime.now(),
                 firstDate: DateTime(DateTime.now().year - 50),
                 lastDate: DateTime(DateTime.now().year + 20),
-              ).then((value){
+              ).then((value) {
                 setState(() {
                   inputDateController.text = '${myDateFormat.format(value)}';
                 });
