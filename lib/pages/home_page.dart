@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
 
   var myDateFormat = DateFormat('dd-MM-yyyy');
 
+  //## Language Change Funtion Started
   void _changeLanguage(Language language) {
     // print(language.languageCode);
     Locale _temp;
@@ -41,6 +42,7 @@ class _HomePageState extends State<HomePage> {
 
     MyApp.setLocale(context, _temp);
   }
+  //## Language Change Function Finished
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +54,7 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.all(8.0),
+            //## Dropdown for Language Change Starts
             child: DropdownButton(
               underline: SizedBox(),
               icon: Icon(
@@ -74,6 +77,7 @@ class _HomePageState extends State<HomePage> {
                 _changeLanguage(language);
               },
             ),
+            //## Dropdown for Language Change Finishes
           ),
         ],
       ),

@@ -38,6 +38,8 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      
+      //## Localization Code Started
       locale: _locale,
       // Language and Country codes
       supportedLocales: [
@@ -60,6 +62,8 @@ class _MyAppState extends State<MyApp> {
 
         return supportedLocales.first;
       },
+      // Localization Code Finishes
+
       debugShowCheckedModeBanner: false,
       onGenerateRoute: CustomRouter.allRoutes,
       initialRoute: homeRoute,
